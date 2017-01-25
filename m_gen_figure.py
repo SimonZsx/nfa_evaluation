@@ -26,7 +26,7 @@ def draw(numbers):
 		n.append(sum(numbers[i])/len(numbers[i]))
 	
 	print n
-	plt.style.use('ggplot')#seaborn-white')
+	plt.style.use('seaborn-dark')
 	labels= ["25000","50000","75000","100000","125000"]
 	colors = ['r','b','y','m','c','g','r','b','y']
 	styles = ['-.', '--', ':', '-', '--', ':', '-','--']
@@ -37,18 +37,18 @@ def draw(numbers):
 	loss = [10,20,30,40,50]
 	x = np.arange(5)
 	width = 0.25
-	ax1.bar(x, n, width, color='r')
+	l1=ax1.bar(x, n, width, color='r')
 	plt.xticks(x+0.5*width, labels)
 	ax1.set_xlabel("# of flows")
 	ax1.set_ylabel("Time (ms)")
 
 	ax2 =ax1.twinx()
 	ax2.set_ylim([0,1000])
-	ax2.bar(x+width, loss, width, color='b')
+	l2=ax2.bar(x+width, loss, width, color='b')
 	ax2.set_ylabel("Packet Loss")
 	plt.savefig("Migration.pdf")
 	plt.show()
-	
+	legend([l1[0], l2[0]], ['Migration Time', 'Migration Loss'], loc="upper left")
 	return n
 
 def main():
