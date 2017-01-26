@@ -22,12 +22,14 @@ def read_log(filename):
 
 def draw(numbers):
 	n = []
+	eb = []
 	for i in range(0,len(numbers)):
 		n.append(sum(numbers[i])/len(numbers[i]))
+		eb.append(np.std(numbers[i]))
 	
 	print n
 	plt.style.use('seaborn-dark')
-	labels= ["25000","50000","75000","100000","125000"]
+	labels= ["25K","50K","75K","100K","125K"]
 	colors = ['r','b','y','m','c','g','r','b','y']
 	styles = ['-.', '--', ':', '-', '--', ':', '-','--']
 	index = 0;
@@ -37,7 +39,7 @@ def draw(numbers):
 	loss = [10,20,30,40,50]
 	x = np.arange(5)
 	width = 0.25
-	l1=ax1.bar(x, n, width, color='r')
+	l1=ax1.bar(x, n, width, color='r', yerr=eb)
 	plt.xticks(x+0.5*width, labels)
 	ax1.set_xlabel("# of flows")
 	ax1.set_ylabel("Time (ms)")

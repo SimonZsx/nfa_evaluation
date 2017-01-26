@@ -22,11 +22,13 @@ def read_log(filename):
 
 def draw(numbers):
 	n = []
+	eb = []
 	for i in range(0,len(numbers)):
 		n.append(sum(numbers[i])/len(numbers[i]))
+		eb.append(np.std(numbers[i]))
 	
 	print n
-	plt.style.use('ggplot')#seaborn-white')
+	plt.style.use('seaborn-dark')#seaborn-white')
 	labels= ["10K","20K","30K","40K","50K"]
 	colors = ['r','b','y','m','c','g','r','b','y']
 	styles = ['-.', '--', ':', '-', '--', ':', '-','--']
@@ -35,7 +37,7 @@ def draw(numbers):
 
 	x = np.arange(5)
 	width = 0.25
-	plt.bar(x, n, width, color='r')
+	plt.bar(x, n, width, color='r', yerr=eb)
 	plt.xticks(x, labels)
 	plt.xlabel("# of flows")
 	plt.ylabel("Time (ms)")
