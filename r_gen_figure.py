@@ -28,16 +28,17 @@ def draw(numbers):
 		eb.append(np.std(numbers[i]))
 	
 	print n
-	plt.style.use('seaborn-dark')#seaborn-white')
+	plt.style.use('ggplot')#seaborn-white')
 	labels= ["10K","20K","30K","40K","50K"]
 	colors = ['r','b','y','m','c','g','r','b','y']
 	styles = ['-.', '--', ':', '-', '--', ':', '-','--']
 	index = 0;
 	line_index = 0;
-
+	fig,ax1 = plt.subplots()
 	x = np.arange(5)
 	width = 0.25
-	plt.bar(x, n, width, color='r', yerr=eb)
+	ax1.plot(x,n,'D',color='r')
+	ax1.errorbar(x, n,fmt=':', color='y', yerr=eb)
 	plt.xticks(x, labels)
 	plt.xlabel("# of flows")
 	plt.ylabel("Time (ms)")

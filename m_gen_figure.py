@@ -28,7 +28,7 @@ def draw(numbers):
 		eb.append(np.std(numbers[i]))
 	
 	print n
-	plt.style.use('seaborn-dark')
+	plt.style.use('ggplot')
 	labels= ["25K","50K","75K","100K","125K"]
 	colors = ['r','b','y','m','c','g','r','b','y']
 	styles = ['-.', '--', ':', '-', '--', ':', '-','--']
@@ -39,18 +39,19 @@ def draw(numbers):
 	loss = [10,20,30,40,50]
 	x = np.arange(5)
 	width = 0.25
-	l1=ax1.bar(x, n, width, color='r', yerr=eb)
-	plt.xticks(x+0.5*width, labels)
+	ax1.plot(x,n,'D',color='b')
+	ax1.errorbar(x, n, fmt=':',color='y', yerr=eb)
+	plt.xticks(x, labels)
 	ax1.set_xlabel("# of flows")
 	ax1.set_ylabel("Time (ms)")
 
-	ax2 =ax1.twinx()
-	ax2.set_ylim([0,1000])
-	l2=ax2.bar(x+width, loss, width, color='b')
-	ax2.set_ylabel("Packet Loss")
+	#ax2 =ax1.twinx()
+	#ax2.set_ylim([0,1000])
+	#l2=ax2.bar(x+width, loss, width, color='b')
+	#ax2.set_ylabel("Packet Loss")
 	plt.savefig("Migration.pdf")
 	plt.show()
-	legend([l1[0], l2[0]], ['Migration Time', 'Migration Loss'], loc="upper left")
+	#legend([l1[0], l2[0]], ['Migration Time', 'Migration Loss'], loc="upper left")
 	return n
 
 def main():
